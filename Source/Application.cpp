@@ -1,6 +1,5 @@
 #include "Application.h"
 #include "Graphics.h"
-//#include "Image.h"
 
 #include "World.h"
 #include "Body.h"
@@ -37,7 +36,7 @@ void DrawBody(Body* body)
 	Vec2 v2 = x + R * Vec2( h.x, -h.y);
 	Vec2 v3 = x + R * Vec2( h.x,  h.y);
 	Vec2 v4 = x + R * Vec2(-h.x,  h.y);
-	
+
 		GLfloat color[12];
 	if (body == bomb)
 		color[0] = 0.4f, color[1] = 0.9f, color[2] = 0.4f,
@@ -49,7 +48,7 @@ void DrawBody(Body* body)
 					    color[3] = 0.8f, color[4] = 0.8f, color[5] = 0.9f,
 					    color[6] = 0.8f, color[7] = 0.8f, color[8] = 0.9f,
 					    color[9] = 0.8f, color[10] = 0.8f, color[11] = 0.9f;
-	GLfloat vertices[]= { 
+	GLfloat vertices[]= {
 	v1.x, v1.y,0.0,
 	v2.x, v2.y,0.0,
 	v3.x, v3.y,0.0,
@@ -79,7 +78,7 @@ void DrawJoint(Joint* joint)
 		0.5f, 0.5f, 0.8f
 	};
 
-	GLfloat vertices[]= { 
+	GLfloat vertices[]= {
 	x1.x, x1.y,0.0,
 	x1.x, x1.y,0.0,
 	p1.x, p1.y,0.0,
@@ -92,7 +91,7 @@ void DrawJoint(Joint* joint)
 		p2.x, p2.y,0.0,
 		p2.x, p2.y,0.0};
 	Graphics::Instance()->drawQuad(GL_LINES,vertices1,color);
-	
+
 }
 
 
@@ -536,14 +535,14 @@ void Application::draw()
 	// Clear the color buffer
 	glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
-	
+
 //	texture1->drawImage(0.0f,0.0f);
 //	Graphics::Instance()->drawRectangle(0.0f,0.0f,1.0f,1.0f);
 	MatrixManager::Instance()->translate(MatrixManager::Instance()->getOrthoProjection(),0.0f,-0.50f, 0.0f);
-	
+
 	MatrixManager::Instance()->scale(MatrixManager::Instance()->getOrthoProjection(),0.03f*this->fl_scale,0.05f*this->fl_scale,1.0f);
 	world.Step(timeStep);
-	
+
 	for (int i = 0; i < numBodies; ++i)
 		DrawBody(bodies + i);
 
